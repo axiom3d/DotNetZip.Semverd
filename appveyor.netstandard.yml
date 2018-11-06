@@ -24,7 +24,7 @@
   artifacts:
   - path: src\Zip NetStandard\*\*.nupkg
     name: NetStandard Nuget Package
-
+-
   version: 1.0.{build}
   image: Visual Studio 2017
   clone_depth: 1
