@@ -1,0 +1,60 @@
+-
+  version: 1.0.{build}
+  image: Visual Studio 2017
+  clone_depth: 1
+  branches:
+    except:
+      - master
+  init:
+    # Good practise, because Windows line endings are different from Unix/Linux ones
+    - cmd: git config --global core.autocrlf true
+  install:
+    # Install repo specific stuff here
+  before_build:
+    # Display .NET Core version
+    - cmd: dotnet --version
+    # Display minimal restore text
+    - cmd: dotnet restore "./src/Zip NetStandard/Zip Netstandard.csproj" --verbosity m
+  build_script:
+    # output will be in ./src/bin/debug/netstandard2.0/publish
+    - cmd: dotnet pack "./src/Zip NetStandard/Zip Netstandard.csproj" --no-restore --include-symbols
+  after_build:
+    # For once the build has completed
+  test: off
+  artifacts:
+  - path: src\Zip NetStandard\*\*.nupkg
+    name: NetStandard Nuget Package
+
+  version: 1.0.{build}
+  image: Visual Studio 2017
+  clone_depth: 1
+  branches:
+    only:
+      - master
+  init:
+    # Good practise, because Windows line endings are different from Unix/Linux ones
+    - cmd: git config --global core.autocrlf true
+  install:
+    # Install repo specific stuff here
+  before_build:
+    # Display .NET Core version
+    - cmd: dotnet --version
+    # Display minimal restore text
+    - cmd: dotnet restore "./src/Zip NetStandard/Zip Netstandard.csproj" --verbosity m
+  build_script:
+    # output will be in ./src/bin/debug/netstandard2.0/publish
+    - cmd: dotnet pack "./src/Zip NetStandard/Zip Netstandard.csproj" --no-restore --include-symbols
+  after_build:
+    # For once the build has completed
+  test: off 
+  artifacts:
+  - path: src\Zip NetStandard\**\*.nupkg
+    name: NetStandard Nuget Package
+  - path: '**\*.nuspec'
+  deploy:
+  - provider: NuGet
+    api_key:
+      secure: M7LFZYxeE65s2U7APTgVFyzBDEiE5LFVFIf+d3ahGxgylxrctFcFJx9cmnamH30f
+    skip_symbols: true
+    artifact: /.*\.nupkg/ 
+

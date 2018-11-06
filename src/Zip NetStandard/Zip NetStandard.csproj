@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFrameworks>netstandard2.0; net461</TargetFrameworks>
         <AssemblyName>Ionic.Zip.NetStandard</AssemblyName>
         <RootNamespace>Zip_NetStandard</RootNamespace>
     </PropertyGroup>
@@ -22,7 +22,6 @@
     <ItemGroup>
         <PackageReference Include="System.Security.Permissions" Version="4.4.1" />
         <PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" />
-        <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>
